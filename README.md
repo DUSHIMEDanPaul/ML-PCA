@@ -4,7 +4,7 @@
 
 This project is structured into **three phases** and demonstrates key linear algebra and machine learning techniques in Python. It includes:
 
-1. A custom Python library for matrix multiplication (`group15multiplyingmatrices`)
+1. A custom Python library for matrix multiplication (`alumath`)
 2. Implementation of **Principal Component Analysis (PCA)** on an African dataset
 3. Manual computation of **eigenvalues** and **eigenvectors**
 
@@ -15,48 +15,82 @@ The goal of this project is to build core ML capabilities from scratch, enhance 
 ## Project Structure
 
 ```
-project-root/
+ML-PCA/
 │
-├── matrices/
-│   └── matrix.py         # Custom matrix multiplication logic
+├── work/                          # Matrix multiplication library
+│   ├── setup.py                   # Package installation configuration
+│   ├── alumath/                   # Main library package
+│   │   ├── __init__.py            # Package exports
+│   │   └── matrix_ops.py          # Matrix operations implementation
+│   └── tests/                     # Unit tests
+│       ├── __init__.py
+│       └── test_matrix_ops.py     # Tests for matrix operations
 │
-├── pca/
-│   ├── Africa_1997-2020_Jan08.csv  # African dataset used in PCA
-│   └── Template_PCA_Formative_1[15].ipynb      # PCA implementation and visualization
-│     
+├── PCA/                           # Principal Component Analysis
+│   ├── Africa_1997-2020_Jan08.csv # African dataset used in PCA
+│   ├── README.md                  # PCA-specific documentation
+│   └── Template_PCA_Formative_1[15].ipynb  # PCA implementation notebook
 │
-└── README.md             # Project documentation
+├── Eigen/                         # Eigenvalue/Eigenvector calculations
+│
+└── README.md                      # Project documentation
 ```
 
 ---
 
-## Phase 1: Matrix Multiplication Library
+## Phase 1: Matrix Multiplication Library (`alumath`)
 
-This custom library implements basic matrix multiplication without using external libraries like NumPy.
+A custom matrix multiplication library with input validation and descriptive error messages, implemented without external dependencies like NumPy.
 
-**Features:**
+### Installation
 
-* Input validation
-* Multiplication of 2D matrices
-* Clean API for reuse
+```bash
+cd work
+pip install -e .
+```
 
-**Usage Example:**
+### Features
+
+- **Matrix class**: Create and manipulate 2D matrices with dimension validation
+- **MatrixMultiplier class**: Perform matrix multiplication with detailed error messages
+- **Input validation**: Ensures matrices have valid dimensions before operations
+- **Descriptive errors**: Clear, informative error messages when multiplication fails
+- **Convenience functions**: Simple API with `multiply_matrices()` and `create_matrix()`
+
+### API Reference
+
+| Function/Class | Description |
+|----------------|-------------|
+| `Matrix(data)` | Create a matrix from a 2D list |
+| `MatrixMultiplier.multiply(A, B)` | Multiply two matrices |
+| `MatrixMultiplier.can_multiply(A, B)` | Check if multiplication is valid |
+| `MatrixMultiplier.get_result_dimensions(A, B)` | Get result matrix dimensions |
+| `multiply_matrices(A, B)` | Convenience function for multiplication |
+| `create_matrix(data)` | Convenience function to create a Matrix |
+
+### Usage Example
 
 ```python
-from group15multiplyingmatrices.matrix import multiply_matrices
+from alumath import multiply_matrices, create_matrix, Matrix
 
+# Using convenience function with 2D lists
 A = [[1, 2], [3, 4]]
 B = [[5, 6], [7, 8]]
-
 result = multiply_matrices(A, B)
+print(result)
+
+# Using Matrix class
+matrix_a = create_matrix([[1, 2, 3], [4, 5, 6]])
+matrix_b = Matrix([[7, 8], [9, 10], [11, 12]])
+result = multiply_matrices(matrix_a, matrix_b)
 print(result)
 ```
 
 ---
 
-##  Phase 2: Principal Component Analysis (PCA)
+## Phase 2: Principal Component Analysis (PCA)
 
-PCA is implemented to analyze and reduce dimensionality of a real-world African dataset.
+PCA is implemented to analyze and reduce dimensionality of a real-world African dataset (1997-2020).
 
 **Key Steps:**
 
@@ -70,20 +104,32 @@ PCA is implemented to analyze and reduce dimensionality of a real-world African 
 
 * `pandas`, `numpy`, `matplotlib`, `seaborn`
 
-> 📌 Dataset: A CSV file containing Africanized data.
+**Dataset:** `PCA/Africa_1997-2020_Jan08.csv` - Contains African socio-economic data for analysis.
+
+**Notebook:** `PCA/Template_PCA_Formative_1[15].ipynb` - Full PCA implementation with visualizations.
 
 ---
 
-## Phase 3: Eigenvalue and Eigenvector Work
+## Phase 3: Eigenvalue and Eigenvector Computation
 
-Handwritten eigenvalues and eigenvectors calculation.
+Manual computation of eigenvalues and eigenvectors to understand the mathematical foundations of PCA.
+
+**Location:** `Eigen/` directory
+
+---
+
+## Requirements
+
+- Python >= 3.7
+- For PCA: `pandas`, `numpy`, `matplotlib`, `seaborn`
+- For matrix library: No external dependencies
 
 ## Contributors
+
 * DUSHIME Dan Paul
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
-
