@@ -17,15 +17,13 @@ The goal of this project is to build core ML capabilities from scratch, enhance 
 ```
 project-root/
 │
-├── work/
+├── matrices/
 │   └── matrix.py         # Custom matrix multiplication logic
 │
 ├── pca/
 │   ├── Africa_1997-2020_Jan08.csv  # African dataset used in PCA
 │   └── Template_PCA_Formative_1[15].ipynb      # PCA implementation and visualization
-│
-├── eigen/
-│   └── eigen_calc.pdf     
+│     
 │
 └── README.md             # Project documentation
 ```
