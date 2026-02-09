@@ -11,7 +11,7 @@ We implemented PCA manually — step by step — to better understand the proces
 ## Dataset
 
 - CSV file: `Africa_1997-2020_Jan08.csv`
-- Source: [Formative2Group15 GitHub Repository](https://github.com/izabayo7/Formative2Group15)
+- Source: [Formative2Group15 GitHub Repository]([https://github.com/izabayo7/Formative2Group15](https://github.com/DUSHIMEDanPaul/ML-PCA/))
 - Size: ~30MB
 - Contains data on various indicators for African countries across multiple years.
 
@@ -107,14 +107,7 @@ We can now apply these techniques to other datasets for dimensionality reduction
 ---
 
 ## Authors
-
-Formative2Group15
-Samuel Wanjohi
-Cedric Izabayo
-Eliel Ntwali
-Edith Githinji
-
----
+DUSHIME Dan Paul
 
 
 
