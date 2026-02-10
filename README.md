@@ -29,7 +29,7 @@ ML-PCA/
 ├── PCA/                           # Principal Component Analysis
 │   ├── Africa_1997-2020_Jan08.csv # African dataset used in PCA
 │   ├── README.md                  # PCA-specific documentation
-│   └── Template_PCA_Formative_1[15].ipynb  # PCA implementation notebook
+│   └── Template_PCA_Formative_2.ipynb  # PCA implementation notebook
 │
 ├── Eigen/                         # Eigenvalue/Eigenvector calculations
 │
