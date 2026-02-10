@@ -31,7 +31,6 @@ ML-PCA/
 │   ├── README.md                  # PCA-specific documentation
 │   └── Template_PCA_Formative_2.ipynb  # PCA implementation notebook
 │
-├── Eigen/                         # Eigenvalue/Eigenvector calculations
 │
 └── README.md                      # Project documentation
 ```
