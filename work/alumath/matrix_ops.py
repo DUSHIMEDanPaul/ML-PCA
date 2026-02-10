@@ -53,10 +53,6 @@ class MatrixMultiplicationError(Exception):
 
 
 class MatrixMultiplier:
-    """
-    The main matrix multiplication class with personality-driven error messages.
-    Each group member has their own style of preventing invalid operations!
-    """
     
     # Funny error messages for each group member
     ERROR_MESSAGES = {
