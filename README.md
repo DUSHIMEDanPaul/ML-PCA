@@ -70,7 +70,7 @@ pip install -e .
 ### Usage Example
 
 ```python
-from alumath import multiply_matrices, create_matrix, Matrix
+from matrix_ops import multiply_matrices, create_matrix, Matrix
 
 # Using convenience function with 2D lists
 A = [[1, 2], [3, 4]]
