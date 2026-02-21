@@ -11,7 +11,7 @@ We implemented PCA manually — step by step — to better understand the proces
 ## Dataset
 
 - CSV file: `Africa_1997-2020_Jan08.csv`
-- Source: (https://github.com/DUSHIMEDanPaul/ML-PCA/)
+- Source: ([https://github.com/DUSHIMEDanPaul/ML-PCA/](https://github.com/DUSHIMEDanPaul/ML-PCA/blob/main/PCA/Africa_1997-2020_Jan08.csv))
 - Size: ~30MB
 - Contains data on various indicators for African countries across multiple years.
 
