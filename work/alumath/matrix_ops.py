@@ -63,7 +63,6 @@ class MatrixMultiplier:
     
     @staticmethod
     def _get_funny_error(matrix1_dims, matrix2_dims):
-        """Generate a funny error message from a random group member."""
         members = list(MatrixMultiplier.ERROR_MESSAGES.keys())
         chosen_member = random.choice(members)
         error_template = random.choice(MatrixMultiplier.ERROR_MESSAGES[chosen_member])
