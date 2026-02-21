@@ -6,7 +6,7 @@ This project is structured into **three phases** and demonstrates key linear alg
 
 1. A custom Python library for matrix multiplication (`alumath`)
 2. Implementation of **Principal Component Analysis (PCA)** on an African dataset
-3. Manual computation of **eigenvalues** and **eigenvectors**
+
 
 The goal of this project is to build core ML capabilities from scratch, enhance mathematical intuition, and apply PCA for dimensionality reduction and data interpretation.
 
@@ -29,7 +29,7 @@ ML-PCA/
 ├── PCA/                           # Principal Component Analysis
 │   ├── Africa_1997-2020_Jan08.csv # African dataset used in PCA
 │   ├── README.md                  # PCA-specific documentation
-│   └── Template_PCA_Formative_2.ipynb  # PCA implementation notebook
+│   └── [Template_PCA_Formative_2.ipynb](https://github.com/DUSHIMEDanPaul/ML-PCA/blob/main/PCA/Template_PCA_Formative_2.ipynb)  # PCA implementation notebook
 │
 │
 └── README.md                      # Project documentation
