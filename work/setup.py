@@ -6,11 +6,11 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="alumathvanguard",
     version="1.0.0",
-    author="ALU Math Vanguard Group 15",
-    description="A fun matrix multiplication library with personality from Group 15",
+    author="Dan",
+    description="A  matrix multiplication library ",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/izabayo7/Formative2Group15/tree/main/Group15MatrixMultiplier",
+    url="https://github.com/DUSHIMEDanPaul/ML-CPA/tree/main/MatrixMultiplier",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -33,7 +33,7 @@ setup(
     },
     keywords="matrix multiplication linear algebra education ALU",
     project_urls={
-        "Bug Reports": "https://github.com/izabayo7/Formative2Group15/issues",
-        "Source": "https://github.com/izabayo7/Formative2Group15/tree/main/Group15MatrixMultiplier",
+        "Bug Reports": "https://github.com/DUSHIMEDanPaul/ML-PCA/issues",
+        "Source": "https://github.com/DUSHIMEDanPaul/ML-PCA/tree/main/GMatrixMultiplier",
     },
 )
