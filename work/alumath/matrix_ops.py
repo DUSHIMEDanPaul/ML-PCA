@@ -2,178 +2,138 @@
 Matrix Operations Module
 """
 
-import random
 from typing import List, Union
 
 
 class Matrix:
-    """A matrix class that stores 2D arrays and provides basic operations."""
-    
+    """Represents a 2D numeric matrix with basic validation."""
+
     def __init__(self, data: List[List[Union[int, float]]]):
-        """
-        Initialize a matrix with 2D list data.
-        
-        Args:
-            data: 2D list representing the matrix
-        """
         if not data or not data[0]:
-            raise ValueError("Matrix cannot be empty!")
-        
-        # Check if all rows have the same length
+            raise ValueError("Matrix cannot be empty.")
+
         row_length = len(data[0])
-        for i, row in enumerate(data):
+        for idx, row in enumerate(data):
             if len(row) != row_length:
-                raise ValueError(f"All rows must have the same length! Row {i} has length {len(row)}, expected {row_length}")
-        
+                raise ValueError(
+                    f"Inconsistent row length at row {idx}: "
+                    f"expected {row_length}, got {len(row)}."
+                )
+
         self.data = data
         self.rows = len(data)
-        self.cols = len(data[0])
-    
-    def __str__(self):
-        """String representation of the matrix."""
-        result = []
-        for row in self.data:
-            result.append("[" + " ".join(f"{x:8.2f}" for x in row) + "]")
-        return "\n".join(result)
-    
-    def __repr__(self):
-        return f"Matrix({self.rows}x{self.cols})"
-    
-    def get_dimensions(self):
-        """Return matrix dimensions as (rows, cols)."""
-        return (self.rows, self.cols)
+        self.cols = row_length
+
+    def __str__(self) -> str:
+        return "\n".join(
+            "[" + " ".join(f"{value:8.2f}" for value in row) + "]"
+            for row in self.data
+        )
+
+    def __repr__(self) -> str:
+        return f"Matrix(rows={self.rows}, cols={self.cols})"
+
+    def get_dimensions(self) -> tuple:
+        return self.rows, self.cols
 
 
 class MatrixMultiplicationError(Exception):
-    """Custom exception for matrix multiplication errors with personality!"""
-    
-    def __init__(self, message, error_type="general"):
+    """Raised when matrix multiplication constraints are violated."""
+
+    def __init__(self, message: str, error_type: str = "general"):
         self.error_type = error_type
         super().__init__(message)
 
 
 class MatrixMultiplier:
-    
-    # Funny error messages for each group member
-    ERROR_MESSAGES = {
-        "ERROR": [
-            "There is an error in your input"
-        ]
-    }
-    
+
     @staticmethod
-    def _get_funny_error(matrix1_dims, matrix2_dims):
-        members = list(MatrixMultiplier.ERROR_MESSAGES.keys())
-        chosen_member = random.choice(members)
-        error_template = random.choice(MatrixMultiplier.ERROR_MESSAGES[chosen_member])
-        
-        detailed_error = f"\n🚫 MATRIX MULTIPLICATION DENIED! 🚫\n\n{error_template}\n\n"
-        detailed_error += f"📊 Technical Details:\n"
-        detailed_error += f"   • Matrix A dimensions: {matrix1_dims[0]}×{matrix1_dims[1]}\n"
-        detailed_error += f"   • Matrix B dimensions: {matrix2_dims[0]}×{matrix2_dims[1]}\n"
-        detailed_error += f"   • Problem: Matrix A has {matrix1_dims[1]} columns, but Matrix B has {matrix2_dims[0]} rows\n"
-        detailed_error += f"   • For multiplication A×B, columns of A must equal rows of B!\n"
-        detailed_error += f"\n💡 Suggestion: Try transposing one of your matrices or check your data!\n"
-        detailed_error += f" Blocked by Dan"
-        
-        return detailed_error
-    
+    def _build_dimension_error(matrix1_dims: tuple, matrix2_dims: tuple) -> str:
+        return (
+            "Matrix multiplication failed due to dimension mismatch.\n"
+            f"Matrix A: {matrix1_dims[0]}x{matrix1_dims[1]}\n"
+            f"Matrix B: {matrix2_dims[0]}x{matrix2_dims[1]}\n"
+            "Requirement: number of columns in Matrix A must equal "
+            "number of rows in Matrix B."
+        )
+
     @staticmethod
-    def multiply(matrix1: Union[Matrix, List[List]], matrix2: Union[Matrix, List[List]]) -> Matrix:
-        """
-        Multiply two matrices with style and personality!
-        
-        Args:
-            matrix1: First matrix (Matrix object or 2D list)
-            matrix2: Second matrix (Matrix object or 2D list)
-            
-        Returns:
-            Matrix: Result of matrix multiplication
-            
-        Raises:
-            MatrixMultiplicationError: When matrices can't be multiplied (with personality!)
-        """
-        # Convert to Matrix objects if needed
+    def multiply(
+        matrix1: Union[Matrix, List[List]],
+        matrix2: Union[Matrix, List[List]]
+    ) -> Matrix:
+
         if not isinstance(matrix1, Matrix):
             matrix1 = Matrix(matrix1)
+
         if not isinstance(matrix2, Matrix):
             matrix2 = Matrix(matrix2)
-        
-        # Check if multiplication is possible
+
         if matrix1.cols != matrix2.rows:
-            funny_error = MatrixMultiplier._get_funny_error(
-                matrix1.get_dimensions(), 
-                matrix2.get_dimensions()
+            error_message = MatrixMultiplier._build_dimension_error(
+                matrix1.get_dimensions(),
+                matrix2.get_dimensions(),
             )
-            raise MatrixMultiplicationError(funny_error, "dimension_mismatch")
-        
-        # Perform matrix multiplication
-        result_rows = matrix1.rows
-        result_cols = matrix2.cols
-        result = [[0 for _ in range(result_cols)] for _ in range(result_rows)]
-        
-        for i in range(result_rows):
-            for j in range(result_cols):
-                for k in range(matrix1.cols):
-                    result[i][j] += matrix1.data[i][k] * matrix2.data[k][j]
-        
+            raise MatrixMultiplicationError(
+                error_message,
+                "dimension_mismatch"
+            )
+
+        result = [
+            [
+                sum(matrix1.data[i][k] * matrix2.data[k][j]
+                    for k in range(matrix1.cols))
+                for j in range(matrix2.cols)
+            ]
+            for i in range(matrix1.rows)
+        ]
+
         return Matrix(result)
-    
+
     @staticmethod
-    def can_multiply(matrix1: Union[Matrix, List[List]], matrix2: Union[Matrix, List[List]]) -> bool:
-        """
-        Check if two matrices can be multiplied.
-        
-        Args:
-            matrix1: First matrix
-            matrix2: Second matrix
-            
-        Returns:
-            bool: True if matrices can be multiplied, False otherwise
-        """
+    def can_multiply(
+        matrix1: Union[Matrix, List[List]],
+        matrix2: Union[Matrix, List[List]]
+    ) -> bool:
+
         if not isinstance(matrix1, Matrix):
             matrix1 = Matrix(matrix1)
+
         if not isinstance(matrix2, Matrix):
             matrix2 = Matrix(matrix2)
-            
+
         return matrix1.cols == matrix2.rows
-    
+
     @staticmethod
-    def get_result_dimensions(matrix1: Union[Matrix, List[List]], matrix2: Union[Matrix, List[List]]) -> tuple:
-        """
-        Get the dimensions of the result matrix if multiplication is possible.
-        
-        Args:
-            matrix1: First matrix
-            matrix2: Second matrix
-            
-        Returns:
-            tuple: (rows, cols) of result matrix
-            
-        Raises:
-            MatrixMultiplicationError: If matrices can't be multiplied
-        """
+    def get_result_dimensions(
+        matrix1: Union[Matrix, List[List]],
+        matrix2: Union[Matrix, List[List]]
+    ) -> tuple:
+
         if not isinstance(matrix1, Matrix):
             matrix1 = Matrix(matrix1)
+
         if not isinstance(matrix2, Matrix):
             matrix2 = Matrix(matrix2)
-        
+
         if not MatrixMultiplier.can_multiply(matrix1, matrix2):
-            funny_error = MatrixMultiplier._get_funny_error(
-                matrix1.get_dimensions(), 
-                matrix2.get_dimensions()
+            error_message = MatrixMultiplier._build_dimension_error(
+                matrix1.get_dimensions(),
+                matrix2.get_dimensions(),
             )
-            raise MatrixMultiplicationError(funny_error, "dimension_mismatch")
-        
-        return (matrix1.rows, matrix2.cols)
+            raise MatrixMultiplicationError(
+                error_message,
+                "dimension_mismatch"
+            )
+
+        return matrix1.rows, matrix2.cols
 
 
-# Convenience functions for easy access
 def multiply_matrices(matrix1, matrix2):
-    """Convenience function for matrix multiplication."""
+    """Convenience wrapper for matrix multiplication."""
     return MatrixMultiplier.multiply(matrix1, matrix2)
 
 
 def create_matrix(data):
-    """Convenience function to create a Matrix object."""
+    """Convenience wrapper for Matrix creation."""
     return Matrix(data)
