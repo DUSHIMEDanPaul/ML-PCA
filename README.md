@@ -107,15 +107,6 @@ PCA is implemented to analyze and reduce dimensionality of a real-world African 
 
 **Notebook:** `PCA/Template_PCA_Formative_1[15].ipynb` - Full PCA implementation with visualizations.
 
----
-
-## Phase 3: Eigenvalue and Eigenvector Computation
-
-Manual computation of eigenvalues and eigenvectors to understand the mathematical foundations of PCA.
-
-**Location:** `Eigen/` directory
-
----
 
 ## Requirements
 
