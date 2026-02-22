@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="alu",
+    name="alu-dan",
     version="1.0.0",
     author="Dan",
     description="A  matrix multiplication library ",
